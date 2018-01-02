@@ -3,57 +3,52 @@ using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// Creates wandering behaviour for a CharacterController.
+/// Creates wandering behaviour 
 /// </summary>
-[RequireComponent(typeof(CharacterController))]
 public class Npc : MonoBehaviour
 {
-	public float speed = 5;
-	public float directionChangeInterval = 1;
-	public float maxHeadingChange = 30;
+	[Header("Movement")]
+	[SerializeField] float xSpeed;
+	[SerializeField] float ySpeed;
+	[Range(0, 1)]
+	[SerializeField] float t;
+	private Rigidbody2D body;
 
-	CharacterController controller;
 	float heading;
-	Vector3 targetRotation;
+	private int Count;
 
 	void Awake ()
 	{
-		controller = GetComponent<CharacterController>();
+		body = GetComponent<Rigidbody2D>();
+		// Set random initial rotation 0 = up 1 = down 2 = left 3 = right
+		heading = Random.Range(0, 4);
 
-		// Set random initial rotation
-		heading = Random.Range(0, 360);
-		transform.eulerAngles = new Vector3(0, heading, 0);
 
-		StartCoroutine(NewHeading());
 	}
 
 	void Update ()
 	{
-		transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
-		var forward = transform.TransformDirection(Vector3.forward);
-		controller.SimpleMove(forward * speed);
-	}
-
-	/// <summary>
-	/// Repeatedly calculates a new direction to move towards.
-	/// Use this instead of MonoBehaviour.InvokeRepeating so that the interval can be changed at runtime.
-	/// </summary>
-	IEnumerator NewHeading ()
-	{
-		while (true) {
-			NewHeadingRoutine();
-			yield return new WaitForSeconds(directionChangeInterval);
+		Count++;
+		if (Count == 15) {
+			heading = Random.Range(0, 4);
+			Count = 0;
 		}
+
+		var velocity = body.velocity;
+		if (heading == 0) {
+			velocity.y = ySpeed;
+		}
+		if (heading == 1) {
+			velocity.y = -ySpeed;
+		}
+		if (heading == 2) {
+			velocity.x = -xSpeed;
+		}
+		if (heading == 3) {
+			velocity.x = xSpeed;
+		}
+		body.velocity = Vector2.Lerp(body.velocity, velocity, t);
 	}
 
-	/// <summary>
-	/// Calculates a new direction to move towards.
-	/// </summary>
-	void NewHeadingRoutine ()
-	{
-		var floor = Mathf.Clamp(heading - maxHeadingChange, 0, 360);
-		var ceil  = Mathf.Clamp(heading + maxHeadingChange, 0, 360);
-		heading = Random.Range(floor, ceil);
-		targetRotation = new Vector3(0, heading, 0);
-	}
+
 }
