@@ -34,6 +34,18 @@ public class player : MonoBehaviour {
 		if (Input.GetKey ("right")) {
 			velocity.x = xSpeed;
 		}
+		if(Input.GetKeyUp("up")){
+			velocity.y = 0;
+		}
+		if(Input.GetKeyUp("down")){
+			velocity.y = 0;
+		}
+		if(Input.GetKeyUp("right")){
+			velocity.x = 0;
+		}
+		if(Input.GetKeyUp("left")){
+			velocity.x = 0;
+		}
 		body.velocity = Vector2.Lerp(body.velocity, velocity, t);
 	}
 
