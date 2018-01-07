@@ -53,7 +53,9 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\DisplayScript.cs" />
      <Compile Include="Assets\scripts\Npc.cs" />
+     <Compile Include="Assets\scripts\NpcRefLeft.cs" />
      <Compile Include="Assets\scripts\player.cs" />
+     <Compile Include="Assets\scripts\playerTest.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

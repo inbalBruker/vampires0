@@ -8,19 +8,26 @@ public class player : MonoBehaviour {
 	[SerializeField] float ySpeed;
 	[Range(0, 1)]
 	[SerializeField] float t;
+	[Range(0, 1)]
+	[SerializeField] float sort;
 	private Rigidbody2D body;
-
+	private SpriteRenderer sprite;
 
 	void Awake ()
 	{
 		body = GetComponent<Rigidbody2D>();
-
+		sprite = GetComponent<SpriteRenderer>();
 
 	}
 
 	void Update ()
 	{
-
+		float y = transform.position.y;
+		sort = Mathf.InverseLerp (-14, 0, y);
+		print (sort);
+		int sortingLayerO = Mathf.FloorToInt(Mathf.Lerp (300, 0, sort));
+		if (sprite)
+			sprite.sortingOrder = sortingLayerO;
 		var velocity = body.velocity;
 		if (Input.GetKey ("up")) {
 			velocity.y = ySpeed;
