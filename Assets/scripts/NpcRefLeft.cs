@@ -16,20 +16,19 @@ public class NpcRefLeft : MonoBehaviour {
 	void Update () {
 
 		float y = npc.transform.position.y;
-//		float sort = Mathf.InverseLerp (-14, 0, y);
-//		print ("sort: " + sort);
-//		dis = Mathf.FloorToInt(Mathf.Lerp (14, 1, sort));
-//		if (y < 0) {
-//			dis = 14;
-//		}
-//		print ("dis:" + dis);
-		float x = npc.transform.position.y;
 
-		var deg = 60;
+		float x = npc.transform.position.x;
+
+		var deg = 30;
 		var rad = deg * Mathf.PI / 180;
 
 		dis = 14 - (y / Mathf.Tan (rad)) - x;
+		print ("dis :" + dis);
 		float thisX = -dis - (dis - x);
+		print ("thisX: "+thisX);
+		if (x > 0) {
+			thisX = -2 * dis - 3 * x;
+		}
 		if (thisX < -dis) {
 			thisX = -dis;
 		}
