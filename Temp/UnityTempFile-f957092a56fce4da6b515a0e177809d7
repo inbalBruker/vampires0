@@ -179,8 +179,9 @@
 -define:UNITY_TEAM_LICENSE
 'Assets/scripts/DisplayScript.cs'
 'Assets/scripts/Npc.cs'
-'Assets/scripts/NpcRef.cs'
+'Assets/scripts/NpcRefLeft.cs'
 'Assets/scripts/player.cs'
+'Assets/scripts/playerTest.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Xml.Linq.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/UnityScript.dll'
