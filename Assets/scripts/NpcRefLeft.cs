@@ -23,9 +23,7 @@ public class NpcRefLeft : MonoBehaviour {
 		var rad = deg * Mathf.PI / 180;
 
 		dis = 14 - (y / Mathf.Tan (rad)) - x;
-		print ("dis :" + dis);
 		float thisX = -dis - (dis - x);
-		print ("thisX: "+thisX);
 		if (x > 0) {
 			thisX = -2 * dis - 3 * x;
 		}
