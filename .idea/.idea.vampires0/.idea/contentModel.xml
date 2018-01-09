@@ -16,6 +16,7 @@
         <e p="scripts" t="Include">
           <e p="DisplayScript.cs" t="Include" />
           <e p="Npc.cs" t="Include" />
+          <e p="Npc2.cs" t="Include" />
           <e p="NpcRefLeft.cs" t="Include" />
           <e p="player.cs" t="Include" />
           <e p="player2.cs" t="Include" />

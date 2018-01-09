@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Assets\scripts\DisplayScript.cs" />
     <Compile Include="Assets\scripts\Npc.cs" />
+    <Compile Include="Assets\scripts\Npc2.cs" />
     <Compile Include="Assets\scripts\NpcRefLeft.cs" />
     <Compile Include="Assets\scripts\player.cs" />
     <Compile Include="Assets\scripts\player2.cs" />
