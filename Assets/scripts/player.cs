@@ -12,6 +12,8 @@ public class player : MonoBehaviour {
 	[SerializeField] float sort;
 	private Rigidbody2D body;
 	private SpriteRenderer sprite;
+	private bool kill;
+	private int killCounter;
 
 	void Awake ()
 	{
@@ -22,9 +24,15 @@ public class player : MonoBehaviour {
 
 	void Update ()
 	{
+		if (killCounter > 5) {
+			killCounter = 0;
+			kill = false;
+		}
+		if (kill) {
+			killCounter++;
+		}
 		float y = transform.position.y;
 		sort = Mathf.InverseLerp (-14, 0, y);
-		print (sort);
 		int sortingLayerO = Mathf.FloorToInt(Mathf.Lerp (300, 0, sort));
 		if (sprite)
 			sprite.sortingOrder = sortingLayerO;
@@ -53,7 +61,24 @@ public class player : MonoBehaviour {
 		if(Input.GetKeyUp("left")){
 			velocity.x = 0;
 		}
+		if(Input.GetKeyUp(KeyCode.RightShift)){
+			print ("hi");
+			kill = true;
+		}
 		body.velocity = Vector2.Lerp(body.velocity, velocity, t);
+	}
+
+	protected void OnCollisionEnter2D(Collision2D collision){
+		if (kill) {
+			if (collision.transform.tag == "npc") {
+				DestroyObject (collision.gameObject);
+			}
+			if (collision.transform.tag == "player2") {
+				print ("player1 Win!!!!");
+				DestroyObject (collision.gameObject);
+			}
+		}
+		
 	}
 
 }
