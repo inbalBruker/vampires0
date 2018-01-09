@@ -19,28 +19,24 @@ public class Npc : MonoBehaviour
 	float heading;
 	private int Count;
 	private SpriteRenderer sprite;
-
+	private int[] arr = {1,2,3,4,2,3,3,2,3,1,4,3,2,2,1,2};
+	private int counter;
+	
 	void Awake ()
 	{
 		body = GetComponent<Rigidbody2D>();
 		sprite = GetComponent<SpriteRenderer>();
 		// Set random initial rotation 0 = up 1 = down 2 = left 3 = right
 		heading = Random.Range(0, 4);
-
-
 	}
 
 	void Update ()
 	{
-		float y = transform.position.y;
-		sort = Mathf.InverseLerp (-14, 0, y);
-		int sortingLayerO = Mathf.FloorToInt(Mathf.Lerp (300, 0, sort));
-		if (sprite)
-			sprite.sortingOrder = sortingLayerO;
-		Count++;
-		if (Count == 15) {
-			heading = Random.Range(0, 4);
-			Count = 0;
+		heading  = arr[counter];
+		counter++;
+		if (counter == arr.Length)
+		{
+			counter = 0;
 		}
 
 		var velocity = body.velocity;
