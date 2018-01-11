@@ -30,10 +30,10 @@ public class Npc2 : MonoBehaviour
 
     void Update ()
     {
-        heading  = arr[counter];
         counter++;
         if (counter == arr.Length)
         {
+			heading  =  Random.Range(0, 4);
             counter = 0;
         }
         

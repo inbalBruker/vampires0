@@ -14,7 +14,9 @@ public class NpcRefLeft : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (npc == null) {
+			Destroy (this.gameObject);
+		}
 		float y = npc.transform.position.y;
 
 		float x = npc.transform.position.x;
@@ -32,4 +34,6 @@ public class NpcRefLeft : MonoBehaviour {
 		}
 		this.transform.position = new Vector3(thisX, y, transform.position.z);
 	}
+
+
 }

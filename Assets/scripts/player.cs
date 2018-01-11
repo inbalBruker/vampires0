@@ -14,9 +14,12 @@ public class player : MonoBehaviour {
 	private SpriteRenderer sprite;
 	private bool kill;
 	private int killCounter;
-
+	//col 1 = npc , col 2 = player2
+	private int col;
+	private Transform collid;
 	void Awake ()
 	{
+		collid = null;
 		body = GetComponent<Rigidbody2D>();
 		sprite = GetComponent<SpriteRenderer>();
 
@@ -24,7 +27,7 @@ public class player : MonoBehaviour {
 
 	void Update ()
 	{
-		if (killCounter > 5) {
+		if (killCounter > 60) {
 			killCounter = 0;
 			kill = false;
 		}
@@ -62,23 +65,40 @@ public class player : MonoBehaviour {
 			velocity.x = 0;
 		}
 		if(Input.GetKeyUp(KeyCode.RightShift)){
-			print ("hi");
 			kill = true;
+			if (collid != null) {
+				print ("you killed " + collid.name);
+				DestroyObject (collid.gameObject);
+			}
+
 		}
 		body.velocity = Vector2.Lerp(body.velocity, velocity, t);
 	}
 
+	void OnCollisionExit2D(Collision2D collision)
+	{
+		collid = null;
+		print ("L");
+	}
+
 	protected void OnCollisionEnter2D(Collision2D collision){
-		if (kill) {
+		
+		print ("col");
 			if (collision.transform.tag == "npc") {
-				DestroyObject (collision.gameObject);
+			collid = collision.transform;
+				if (kill) {
+				
+				print ("hihihihihi");
+//				DestroyObject (collision.gameObject);
+				}
 			}
 			if (collision.transform.tag == "player2") {
+			collid = collision.transform;
+				if (kill) {
 				print ("player1 Win!!!!");
-				DestroyObject (collision.gameObject);
+//				DestroyObject (collision.gameObject);
+				}
 			}
-		}
-		
 	}
 
 }

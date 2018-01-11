@@ -15,6 +15,7 @@ public class Npc : MonoBehaviour
 	[Range(0, 1)]
 	[SerializeField] float sort;
 	private Rigidbody2D body;
+	public bool isDead;
 
 	float heading;
 	private int Count;
@@ -28,14 +29,20 @@ public class Npc : MonoBehaviour
 		sprite = GetComponent<SpriteRenderer>();
 		// Set random initial rotation 0 = up 1 = down 2 = left 3 = right
 		heading = Random.Range(0, 4);
+		isDead = false;
 	}
 
 	void Update ()
 	{
-		heading  = arr[counter];
+		float y = transform.position.y;
+		sort = Mathf.InverseLerp (-14, 0, y);
+		int sortingLayerO = Mathf.FloorToInt(Mathf.Lerp (300, 0, sort));
+		if (sprite)
+			sprite.sortingOrder = sortingLayerO;
 		counter++;
 		if (counter == arr.Length)
 		{
+			heading  = Random.Range(0, 4);
 			counter = 0;
 		}
 

@@ -17,7 +17,9 @@ namespace AssemblyCSharp
 
 		// Update is called once per frame
 		void Update () {
-
+			if (npc == null) {
+				Destroy (this.gameObject);
+			}
 			float y = npc.transform.position.y;
 
 			float x = npc.transform.position.x;
