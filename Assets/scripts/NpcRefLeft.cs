@@ -39,7 +39,7 @@ public class NpcRefLeft : MonoBehaviour {
 		rend.material.color = new Color(rend.material.color.r,rend.material.color.g, rend.material.color.b, colorOp);
 		Vector3 temp = leftWall.calcPosForNpc(npc.transform.position);
 //		temp [0] += 1.7f;
-		temp [1] += 0.75f;  //todo updates
+		temp [1] += 0.95f;  //todo updates
 		this.transform.position = temp;
 		move = npc.isMoving();
 		animator.SetBool(moveBollID, move);
