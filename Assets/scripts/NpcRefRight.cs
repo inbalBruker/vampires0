@@ -30,6 +30,7 @@ namespace AssemblyCSharp
 		void Update () {
 			if (npc == null) {
 				Destroy (this.gameObject);
+				return;
 			}
 			Vector3 npcPos = npc.transform.position;
 			dis = Mathf.Sqrt ((this.transform.position.x - npcPos [0]) * (this.transform.position.x - npcPos [0]) + (this.transform.position.y - npcPos [1]) * (this.transform.position.y - npcPos [1]));

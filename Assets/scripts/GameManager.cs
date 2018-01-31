@@ -89,10 +89,12 @@ namespace AssemblyCSharp
 				Destroy (man1left.gameObject);
 				Destroy (man1right.gameObject);
 				if (player1 == 0) {
+					man1.transform.tag = "player1";
 					man1.GetComponent<Npc>().enabled=false;
 					man1.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 0) {
+					man1.transform.tag = "player2";
 					man1.GetComponent<Npc>().enabled=false;
 					man1.GetComponent<player>().enabled=false;
 				}
@@ -103,10 +105,13 @@ namespace AssemblyCSharp
 				Destroy (man2left.gameObject);
 				Destroy (man2right.gameObject);
 				if (player1 == 1) {
+					man2.transform.tag = "player1";
 					man2.GetComponent<Npc>().enabled=false;
 					man2.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 1) {
+					man2.transform.tag = "player2";
+
 					man2.GetComponent<Npc>().enabled=false;
 					man2.GetComponent<player>().enabled=false;
 				}
@@ -117,10 +122,13 @@ namespace AssemblyCSharp
 				Destroy (man3left.gameObject);
 				Destroy (man3right.gameObject);
 				if (player1 == 2) {
+					man3.transform.tag = "player1";
 					man3.GetComponent<Npc>().enabled=false;
 					man3.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 2) {
+					man3.transform.tag = "player2";
+
 					man3.GetComponent<Npc>().enabled=false;
 					man3.GetComponent<player>().enabled=false;
 				}
@@ -131,10 +139,13 @@ namespace AssemblyCSharp
 				Destroy (man4left.gameObject);
 				Destroy (man4right.gameObject);
 				if (player1 == 3) {
+					man4.transform.tag = "player1";
 					man4.GetComponent<Npc>().enabled=false;
 					man4.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 3) {
+					man4.transform.tag = "player2";
+
 					man4.GetComponent<Npc>().enabled=false;
 					man4.GetComponent<player>().enabled=false;
 				}
@@ -145,10 +156,13 @@ namespace AssemblyCSharp
 				Destroy (man5left.gameObject);
 				Destroy (man5right.gameObject);
 				if (player1 == 4) {
+					man5.transform.tag = "player1";
 					man5.GetComponent<Npc>().enabled=false;
 					man5.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 4) {
+					man5.transform.tag = "player2";
+
 					man5.GetComponent<Npc>().enabled=false;
 					man5.GetComponent<player>().enabled=false;
 				}
@@ -159,10 +173,13 @@ namespace AssemblyCSharp
 				Destroy (man6left.gameObject);
 				Destroy (man6right.gameObject);
 				if (player1 == 5) {
+					man6.transform.tag = "player1";
 					man6.GetComponent<Npc>().enabled=false;
 					man6.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 5) {
+					man6.transform.tag = "player2";
+
 					man6.GetComponent<Npc>().enabled=false;
 					man6.GetComponent<player>().enabled=false;
 				}
@@ -173,10 +190,13 @@ namespace AssemblyCSharp
 				Destroy (man7left.gameObject);
 				Destroy (man7right.gameObject);
 				if (player1 == 6) {
+					man7.transform.tag = "player1";
 					man7.GetComponent<Npc>().enabled=false;
 					man7.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 6) {
+					man7.transform.tag = "player2";
+
 					man7.GetComponent<Npc>().enabled=false;
 					man7.GetComponent<player>().enabled=false;
 				}
@@ -187,10 +207,12 @@ namespace AssemblyCSharp
 				Destroy (man8left.gameObject);
 				Destroy (man8right.gameObject);
 				if (player1 == 7) {
+					man8.transform.tag = "player1";
 					man8.GetComponent<Npc>().enabled=false;
 					man8.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 7) {
+					man8.transform.tag = "player2";
 					man8.GetComponent<Npc>().enabled=false;
 					man8.GetComponent<player>().enabled=false;
 				}
@@ -201,10 +223,12 @@ namespace AssemblyCSharp
 				Destroy (woman1left.gameObject);
 				Destroy (woman1right.gameObject);
 				if (player1 == 8) {
+					woman1.transform.tag = "player1";
 					woman1.GetComponent<Npc>().enabled=false;
 					woman1.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 8) {
+					woman1.transform.tag = "player2";
 					woman1.GetComponent<Npc>().enabled=false;
 					woman1.GetComponent<player>().enabled=false;
 				}
@@ -215,10 +239,12 @@ namespace AssemblyCSharp
 				Destroy (woman2left.gameObject);
 				Destroy (woman2right.gameObject);
 				if (player1 == 9) {
+					woman2.transform.tag = "player1";
 					woman2.GetComponent<Npc>().enabled=false;
 					woman2.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 9) {
+					woman2.transform.tag = "player2";
 					woman2.GetComponent<Npc>().enabled=false;
 					woman2.GetComponent<player>().enabled=false;
 				}
@@ -229,10 +255,13 @@ namespace AssemblyCSharp
 				Destroy (woman3left.gameObject);
 				Destroy (woman3right.gameObject);
 				if (player1 == 10) {
+					woman3.transform.tag = "player1";
+
 					woman3.GetComponent<Npc>().enabled=false;
 					woman3.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 10) {
+					woman3.transform.tag = "player2";
 					woman3.GetComponent<Npc>().enabled=false;
 					woman3.GetComponent<player>().enabled=false;
 				}
@@ -243,10 +272,13 @@ namespace AssemblyCSharp
 				Destroy (woman4left.gameObject);
 				Destroy (woman4right.gameObject);
 				if (player1 == 11) {
+					woman4.transform.tag = "player1";
+
 					woman4.GetComponent<Npc>().enabled=false;
 					woman4.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 11) {
+					woman4.transform.tag = "player2";
 					woman4.GetComponent<Npc>().enabled=false;
 					woman4.GetComponent<player>().enabled=false;
 				}
@@ -257,10 +289,13 @@ namespace AssemblyCSharp
 				Destroy (woman5left.gameObject);
 				Destroy (woman5right.gameObject);
 				if (player1 == 12) {
+					woman5.transform.tag = "player1";
+
 					woman5.GetComponent<Npc>().enabled=false;
 					woman5.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 12) {
+					woman5.transform.tag = "player2";
 					woman5.GetComponent<Npc>().enabled=false;
 					woman5.GetComponent<player>().enabled=false;
 				}
@@ -271,10 +306,14 @@ namespace AssemblyCSharp
 				Destroy (woman6left.gameObject);
 				Destroy (woman6right.gameObject);
 				if (player1 == 13) {
+					woman6.transform.tag = "player1";
+
 					woman6.GetComponent<Npc>().enabled=false;
 					woman6.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 13) {
+					woman6.transform.tag = "player2";
+
 					woman6.GetComponent<Npc>().enabled=false;
 					woman6.GetComponent<player>().enabled=false;
 				}
@@ -285,10 +324,14 @@ namespace AssemblyCSharp
 				Destroy (woman7left.gameObject);
 				Destroy (woman7right.gameObject);
 				if (player1 == 14) {
+					woman7.transform.tag = "player1";
+
 					woman7.GetComponent<Npc>().enabled=false;
 					woman7.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 14) {
+					woman7.transform.tag = "player2";
+
 					woman7.GetComponent<Npc>().enabled=false;
 					woman7.GetComponent<player>().enabled=false;
 				}
@@ -299,10 +342,14 @@ namespace AssemblyCSharp
 				Destroy (woman8left.gameObject);
 				Destroy (woman8right.gameObject);
 				if (player1 == 15) {
+					woman8.transform.tag = "player1";
+
 					woman8.GetComponent<Npc>().enabled=false;
 					woman8.GetComponent<playerAswd>().enabled=false;
 				}
 				if (player2 == 15) {
+					woman8.transform.tag = "player2";
+
 					woman8.GetComponent<Npc>().enabled=false;
 					woman8.GetComponent<player>().enabled=false;
 				}

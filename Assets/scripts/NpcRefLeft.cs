@@ -27,6 +27,7 @@ public class NpcRefLeft : MonoBehaviour {
 	void Update () {
 		if (npc == null) {
 			Destroy (this.gameObject);
+			return;
 		}
 
 

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class player : MonoBehaviour {
-	[Header("Animation")]
-	[SerializeField] string stabBoll;
+public class player : MonoBehaviour
+{
+	private const float COOLDOWN_BETWEEN_STABS_CONST = 5;
+	[Header("Animation")] [SerializeField] string stabBoll;
 	private bool stab;
 	private int stabBollAnimID;
 	[SerializeField] string moveBoll;
@@ -12,24 +14,27 @@ public class player : MonoBehaviour {
 	private int moveBollID;
 	private Animator animator;
 
-	[Header("Movement")]
-	[SerializeField] float xSpeed;
+	[Header("Movement")] [SerializeField] float xSpeed;
 	[SerializeField] float ySpeed;
-	[Range(0, 1)]
-	[SerializeField] float t;
-	[Range(0, 1)]
-	[SerializeField] float sort;
+	[Range(0, 1)] [SerializeField] float t;
+	[Range(0, 1)] [SerializeField] float sort;
 	private Rigidbody2D body;
 	private SpriteRenderer sprite;
 	private bool kill;
-	private int killCounter;
+
+	private float killCounter;
+
 	//col 1 = npc , col 2 = player2
 	private int col;
+
 	private Transform collid;
 	private bool playerMoved;
 	float heading;
 	private int counter;
-	void Awake ()
+
+
+
+	void Awake()
 	{
 		animator = GetComponent<Animator>();
 		stabBollAnimID = Animator.StringToHash(stabBoll);
@@ -41,36 +46,41 @@ public class player : MonoBehaviour {
 
 	}
 
-	void Update ()
+	void Update()
 	{
 		var velocity = body.velocity;
-		stab = false;
-		if (!playerMoved) {
+		if (!playerMoved)
+		{
 			counter++;
 			if (counter == 15)
 			{
-				heading  = Random.Range(0, 5);
+				heading = Random.Range(0, 5);
 				counter = 0;
 			}
 
 			velocity = body.velocity;
-			if (heading == 0) {
+			if (heading == 0)
+			{
 				move = true;
 				velocity.y = ySpeed;
 			}
-			if (heading == 1) {
+			if (heading == 1)
+			{
 				move = true;
 				velocity.y = -ySpeed;
 			}
-			if (heading == 2) {
+			if (heading == 2)
+			{
 				move = true;
 				velocity.x = -xSpeed;
 			}
-			if (heading == 3) {
+			if (heading == 3)
+			{
 				move = true;
 				velocity.x = xSpeed;
 			}
-			if (heading == 4) {
+			if (heading == 4)
+			{
 				move = false;
 				velocity.x = 0;
 				velocity.y = 0;
@@ -79,105 +89,134 @@ public class player : MonoBehaviour {
 		}
 
 
-		if (killCounter > 60) {
-			killCounter = 0;
-			kill = false;
-		}
-		if (kill) {
-			killCounter++;
-		}
 		float y = transform.position.y;
-		sort = Mathf.InverseLerp (-14, 14, y);  //todo updates
-		int sortingLayerO = Mathf.FloorToInt(Mathf.Lerp (300, 0, sort));
+		sort = Mathf.InverseLerp(-14, 14, y); //todo updates
+		int sortingLayerO = Mathf.FloorToInt(Mathf.Lerp(300, 0, sort));
 		if (sprite)
 			sprite.sortingOrder = sortingLayerO;
-		if (Input.GetKey ("up")) {
+		if (Input.GetKey("up"))
+		{
 			playerMoved = true;
 			move = true;
 			velocity.y = ySpeed;
 		}
-		if (Input.GetKey ("down")) {
+		if (Input.GetKey("down"))
+		{
 			playerMoved = true;
 			move = true;
 			velocity.y = -ySpeed;
 		}
-		if (Input.GetKey ("left")) {
+		if (Input.GetKey("left"))
+		{
 			playerMoved = true;
 			move = true;
 			velocity.x = -xSpeed;
 		}
-		if (Input.GetKey ("right")) {
+		if (Input.GetKey("right"))
+		{
 			playerMoved = true;
 			move = true;
 			velocity.x = xSpeed;
 		}
-		if(Input.GetKeyUp("up")){
+		if (Input.GetKeyUp("up"))
+		{
 			move = false;
 			velocity.y = 0;
 		}
-		if(Input.GetKeyUp("down")){
+		if (Input.GetKeyUp("down"))
+		{
 			move = false;
 			velocity.y = 0;
 		}
-		if(Input.GetKeyUp("right")){
+		if (Input.GetKeyUp("right"))
+		{
 			move = false;
 			velocity.x = 0;
 		}
-		if(Input.GetKeyUp("left")){
+		if (Input.GetKeyUp("left"))
+		{
 			move = false;
 			velocity.x = 0;
 		}
-		if(Input.GetKeyUp(KeyCode.RightShift)){
-			kill = true;
-			stab = true;
-			if (collid != null) {
-				print ("you killed " + collid.name);
-				DestroyObject (collid.gameObject);
-			}
 
+		stab = false;
+		kill = false;
+		killCounter -= Time.deltaTime;
+
+		if (Input.GetKeyUp(KeyCode.RightShift))
+		{
+			// if the cooldown ended
+			if (killCounter < 0)
+			{
+				kill = true;
+				stab = true;
+				//if we actually killed someone
+				if (collid != null)
+				{
+					//reset cooldown only if he killed someone
+					killCounter = COOLDOWN_BETWEEN_STABS_CONST;
+
+					if (collid.transform.tag =="player2")
+					{
+						//game is over
+						SceneManager.LoadScene("player1 win");
+					}
+					//destroy the object npc otherwise
+					DestroyObject(collid.gameObject);
+
+				}
+			}
 		}
+
 		animator.SetBool(moveBollID, move);
 		animator.SetBool(stabBollAnimID, stab);
 		body.velocity = Vector2.Lerp(body.velocity, velocity, t);
 	}
 
-	void OnCollisionExit2D(Collision2D collision)
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.transform.tag == "player2" || other.transform.tag == "npc") {
+			collid = other.transform;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
 	{
 		collid = null;
 	}
 
-	protected void OnCollisionEnter2D(Collision2D collision){
-		
-			if (collision.transform.tag == "npc") {
-			collid = collision.transform;
-				if (kill) {
-				
-//				DestroyObject (collision.gameObject);
-				}
-			}
-			if (collision.transform.tag == "player2") {
-			collid = collision.transform;
-				if (kill) {
-//				DestroyObject (collision.gameObject);
-				}
-			}
-	}
-//	private bool facingRight = true; //Depends on if your animation is by default facing right or left
-//
-//	void FixedUpdate()
-//	{
-//		float h = Input.GetAxis("Horizontal");
-//		if(h > 0 && !facingRight)
-//			Flip();
-//		else if(h < 0 && facingRight)
-//			Flip();
-//	}
-//	void Flip ()
-//	{
-//		facingRight = !facingRight;
-//		Vector3 theScale = transform.localScale;
-//		theScale.x *= -1;
-//		transform.localScale = theScale;
-//	}
+	//    void OnCollisionExit2D(Collision2D collision)
+	//    {
+	//        if (collision.otherCollider.isTrigger)
+	//        {
+	//            collid = null;
+	//        }
+	//        
+	//    }
+	//
+	//    protected void OnCollisionEnter2D(Collision2D collision)
+	//    { 
+	//        if (collision.otherCollider.isTrigger)
+	//        {
+	//            collid = collision.transform;
+	//        }
+	//    }
 
+	//	private bool facingRight = true; //Depends on if your animation is by default facing right or left
+	//
+	//	void FixedUpdate()
+	//	{
+	//		float h = Input.GetAxis("Horizontal");
+	//		if(h > 0 && !facingRight)
+	//			Flip();
+	//		else if(h < 0 && facingRight)
+	//			Flip();
+	//	}
+	//	void Flip ()
+	//	{
+	//		facingRight = !facingRight;
+	//		Vector3 theScale = transform.localScale;
+	//		theScale.x *= -1;
+	//		transform.localScale = theScale;
+	//	}
 }
