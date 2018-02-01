@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\prefabs\CustomSceneManager.cs" />
+     <Compile Include="Assets\scripts\CharacterController.cs" />
      <Compile Include="Assets\scripts\DisplayScript.cs" />
      <Compile Include="Assets\scripts\GameManager.cs" />
      <Compile Include="Assets\scripts\LoadScreenOnClick.cs" />

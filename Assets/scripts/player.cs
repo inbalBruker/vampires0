@@ -48,7 +48,12 @@ public class player : MonoBehaviour
 
 	void Update()
 	{
+		move = false;
 		var velocity = body.velocity;
+		velocity.y = 0; velocity.x = 0;
+		if (velocity.y != 0 || velocity.x != 0) {
+			move = true;
+		}
 		if (!playerMoved)
 		{
 			counter++;
