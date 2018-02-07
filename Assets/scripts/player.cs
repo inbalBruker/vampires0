@@ -32,7 +32,11 @@ public class player : MonoBehaviour
 	float heading;
 	private int counter;
 
+	//dealy for destroing gameObject
 
+	GameObject toDestroy;
+	int dealyCounter;
+	bool usedStab;
 
 	void Awake()
 	{
@@ -48,6 +52,14 @@ public class player : MonoBehaviour
 
 	void Update()
 	{
+		if (dealyCounter == 30 && usedStab) {
+			dealyCounter = 0;
+			usedStab = false;
+			DestroyObject (toDestroy);
+		}
+		if (usedStab) {
+			++dealyCounter;
+		}
 		move = false;
 		var velocity = body.velocity;
 		velocity.y = 0; velocity.x = 0;
@@ -115,12 +127,14 @@ public class player : MonoBehaviour
 		{
 			playerMoved = true;
 			move = true;
+			heading = 2;
 			velocity.x = -xSpeed;
 		}
 		if (Input.GetKey("right"))
 		{
 			playerMoved = true;
 			move = true;
+			heading = 3;
 			velocity.x = xSpeed;
 		}
 		if (Input.GetKeyUp("up"))
@@ -167,7 +181,9 @@ public class player : MonoBehaviour
 						SceneManager.LoadScene("player1 win");
 					}
 					//destroy the object npc otherwise
-					DestroyObject(collid.gameObject);
+					//DestroyObject(collid.gameObject);
+					usedStab = true;
+					toDestroy = collid.gameObject;
 
 				}
 			}
@@ -206,22 +222,29 @@ public class player : MonoBehaviour
 	//            collid = collision.transform;
 	//        }
 	//    }
+	private bool facingRight = true; //Depends on if your animation is by default facing right or left
 
-	//	private bool facingRight = true; //Depends on if your animation is by default facing right or left
-	//
-	//	void FixedUpdate()
-	//	{
-	//		float h = Input.GetAxis("Horizontal");
-	//		if(h > 0 && !facingRight)
-	//			Flip();
-	//		else if(h < 0 && facingRight)
-	//			Flip();
-	//	}
-	//	void Flip ()
-	//	{
-	//		facingRight = !facingRight;
-	//		Vector3 theScale = transform.localScale;
-	//		theScale.x *= -1;
-	//		transform.localScale = theScale;
-	//	}
+	void FixedUpdate()
+	{
+		float h = 0;
+		if (heading == 2) {
+			h = -1;
+		}
+		if (heading == 3) {
+			h = 1;
+		}
+
+
+		if(h > 0 && !facingRight)
+			Flip();
+		else if(h < 0 && facingRight)
+			Flip();
+	}
+	void Flip ()
+	{
+		facingRight = !facingRight;
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
 }
